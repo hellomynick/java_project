@@ -1,0 +1,261 @@
+body {
+    background-color: #F6F5F2;
+    height: 100%;
+}
+
+input {
+    border: none;
+}
+
+input:focus {
+    outline: 0;
+}
+
+.wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        color: white;
+        text-decoration-line: underline;
+    }
+
+    .field {
+        display: flex;
+        margin-top: 10px;
+
+        .image {
+            height: 50px;
+            width: 50px;
+            border-radius: 50px;
+        }
+
+        .label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+
+        .input {
+            height: 40px;
+            width: 250px;
+            border: 2px solid gray;
+            padding: 4px 14px;
+            margin-left: 16px;
+        }
+
+        .button-login {
+            margin-top: 30px;
+            width: 30%;
+            height: 40px;
+            background-color: antiquewhite;
+        }
+    }
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    color: red;
+    margin: 10px 0 10px 0;
+}
+
+.header {
+    height: 60px;
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid cornflowerblue;
+    padding: 10px;
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 10px 10px 10px;
+
+        .item-header {
+            margin: 10px 0 10px 0;
+        }
+
+        .item-body {
+            border: none;
+            background-color: white;
+            cursor: pointer;
+            margin-left: 12px;
+        }
+    }
+}
+
+.register-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    max-width: 1400px;
+    border: none;
+
+    .table-header {
+        background-color: bisque;
+    }
+
+    .th-col {
+        padding: 5px 10px 5px 10px;
+    }
+
+    .td-row {
+        padding: 10px;
+    }
+}
+
+table tr:hover td {
+    background-color: antiquewhite;
+    cursor: pointer;
+}
+
+.table-footer {
+}
+
+.table-paging {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+
+    .previous {
+        width: 20px;
+        height: 20px;
+        border-right: 1px solid lightgray;
+        cursor: pointer;
+    }
+
+    .page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 10px 0 10px;
+        height: 40px;
+    }
+
+    .next {
+        width: 20px;
+        height: 20px;
+        transform: rotate(180deg);
+        border-right: 1px solid lightgray;
+        cursor: pointer;
+    }
+}
+
+.account-action {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.button-create-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    width: 64px;
+    height: 40px;
+    padding: 0 30px 0 30px;
+    cursor: pointer;
+}
+
+.account-search {
+    display: flex;
+    height: 40px;
+    align-items: center;
+
+    .account-search-input {
+        width: 280px;
+        height: 30px;
+        display: flex;
+        margin: 10px 0 10px 0;
+        padding: 10px 20px 10px 20px;
+        box-sizing: border-box;
+        border-radius: 40px;
+        box-shadow: 0 0 5px lightgray
+    }
+}
+
+.form-create-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px 20px 40px;
+    background-color: white;
+    box-shadow: 10px 10px 5px lightgray;
+    border-radius: 4px;
+
+    .form-create-header {
+        color: grey;
+        text-transform: uppercase;
+    }
+
+    .form-create {
+        display: flex;
+        gap: 60px;
+
+    }
+
+    .create-fields {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .create-input-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .create-input-label {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .create-input {
+        width: 280px;
+        display: flex;
+        margin: 10px 0 10px 0;
+        padding: 10px 20px 10px 20px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        box-shadow: 0 0 5px lightgray
+    }
+
+    .create-checkbox {
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+    }
+}
+

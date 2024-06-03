@@ -1,0 +1,24 @@
+<header th:fragment="header">
+    <div class="header">
+        <img alt="logo" onclick="showHeaderContent()"
+             style="height: 32px;width: 32px; margin-left: 10px; cursor: pointer" th:src="@{/images/list.svg}">
+    </div>
+
+    <div id="headerContent" style="display: none">
+        <div class="list">
+            <div class="item">
+                <h4 class="item-header">1. Account Staff</h4>
+                <form th:action="@{/accounts}">
+                    <input class="item-body" type="submit" value="1. Account staff management"/>
+                </form>
+            </div>
+
+            <div class="item">
+                <h4 class="item-header">2. Management Access</h4>
+                <div class="item-body">
+                    2.1 Management locations
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

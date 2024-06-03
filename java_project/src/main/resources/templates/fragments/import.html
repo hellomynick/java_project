@@ -1,0 +1,19 @@
+<import th:fragment="import">
+    <div class="import-wrapper" id="importWrapper">
+        <div class="import-card">
+            <div class="import">
+                <div class="import-card-header">
+                    <h4 style="text-transform: uppercase; margin: 0">Import file here</h4>
+                    <img alt="logo" onclick="closeImportScreen()" style="height: 20px;width: 20px;cursor: pointer"
+                         th:src="@{/images/close.svg}">
+                </div>
+                <div class="import-card-body">
+                    <input id="importFile" onchange="importFile()" placeholder="Import" type="file"/>
+                    <button type="submit">
+                        <img alt="logo" style="height: 20px;width: 20px" th:src="@{/images/send_email.svg}">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</import>

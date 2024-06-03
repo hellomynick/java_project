@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;width: 100%" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Spring Boot web</title>
+</head>
+<body style="margin: 0">
+<form enctype="multipart/form-data" method="post" th:action="@{/register}" th:object="${registerRequest}">
+    <h2 class="title">user register</h2>
+    <div class="field">
+        <label class="label" for="userName">User Name: </label>
+        <input class="input" id="userName" placeholder="input your name" required th:field="*{userName}"
+               type="text"/>
+    </div>
+    <div class="field">
+        <label class="label" for="password">Password:</label>
+        <input class="input" id="password" placeholder="input your password" required
+               th:field="*{password}" type="password"/>
+    </div>
+    <div class="field">
+        <label class="label" for="same_password">Password:</label>
+        <input class="input" id="same_password" placeholder="input your password again" required
+               th:field="*{samePassword}" type="password"/>
+    </div>
+    <h3 class="alert" th:text="${message}"></h3>
+    <div class="field" style="align-content: center; justify-content: center">
+        <button class="button-login" type="submit">Submit</button>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;width: 100%" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Spring Boot web</title>
+    <script type="text/javascript">
+        function showHeaderContent() {
+            let headerContent = document.getElementById('headerContent');
+            if (headerContent.style.display === 'none' || headerContent.style.display === '') {
+                headerContent.style.display = 'table';
+            } else {
+                headerContent.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body style="margin: 0">
+<div th:replace="fragments/header :: header"></div>
+</body>
+</html>

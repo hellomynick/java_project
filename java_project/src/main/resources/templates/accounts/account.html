@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/import.css}">
+    <title>Spring Boot web</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script th:src="@{/js/accountAction.js}"></script>
+    <script th:src="@{/js/import.js}"></script>
+    <script th:src="@{/js/entities/account.js}"></script>
+
+    <script type="text/javascript">
+        function showHeaderContent() {
+            let headerContent = document.getElementById('headerContent');
+            if (headerContent.style.display === 'none' || headerContent.style.display === '') {
+                headerContent.style.display = 'block';
+            } else {
+                headerContent.style.display = 'none';
+            }
+        }
+    </script>
+
+</head>
+<div th:replace="fragments/import :: import"></div>
+<body style="margin: 0">
+<div th:replace="fragments/header :: header"></div>
+<div>
+    <div class="account-action">
+        <button class="button-create-account" onclick="showImportScreen()">
+            <img alt="logo" th:src="@{/images/import.svg}">
+        </button>
+
+        <form th:action="@{/redirectAccountCreate}">
+            <button class="button-create-account" type="submit">
+                <img alt="logo" th:src="@{/images/create.svg}">
+            </button>
+        </form>
+
+        <div class="account-search">
+            <label class="create-input-label" for="accountSearch"></label>
+            <input class="account-search-input" id="accountSearch" oninput="searchAccount()" placeholder="search"
+                   required
+                   type="text"
+                   value=""/>
+            <img alt="logo" style="width: 20px;margin-left: 4px" th:src="@{/images/search.svg}">
+        </div>
+    </div>
+</div>
+<div class="table">
+    <table id="account-table">
+        <thead class="table-header">
+        <tr>
+            <th class="th-col" scope="col"></th>
+            <th class="th-col" scope="col">Key</th>
+            <th class="th-col" scope="col">Full Name</th>
+            <th class="th-col" scope="col">Is Active</th>
+            <th class="th-col" scope="col">Email</th>
+            <th class="th-col" scope="col">Phone Number</th>
+            <th class="th-col" scope="col">Created Date</th>
+            <th class="th-col" scope="col">Created By</th>
+            <th class="th-col" scope="col">Updated Date</th>
+            <th class="th-col" scope="col">Updated By</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div class="table-footer" id="table-footer">
+        <div class="table-paging">
+            <img alt="logo" class="previous"
+                 id="previous"
+                 onclick="pagingAction(-1)"
+                 th:src="@{/images/previous.svg}">
+            <div class="page" id="pagination">
+                <span>Page</span>
+                <span id="pageIndex" style="margin-left: 8px"></span>
+                <span style="margin: 0 8px 0 8px">of</span>
+                <span id="pageTotal"></span>
+            </div>
+            <img alt="logo" class="next" id="next" onclick="pagingAction(1)"
+                 th:src="@{/images/previous.svg}">
+        </div>
+    </div>
+</div>
+</body>
+</html>

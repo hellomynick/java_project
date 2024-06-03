@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;width: 100%" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Spring Boot web</title>
+</head>
+<body style="height: 100%; background-color: #6AD4DD;margin: 0">
+<div class="wrapper">
+    <div class="box">
+        <form enctype="multipart/form-data" method="post" th:action="@{/login}" th:object="${loginRequest}">
+            <h2 class="title">user login</h2>
+            <div class="field">
+                <img alt="logo" class="image" th:src="@{/images/avatar.svg}"></img>
+                <label class="label" for="userName">User Name: </label>
+                <input class="input" id="userName" placeholder="input your name" required th:field="*{userName}"
+                       type="text"/>
+            </div>
+            <div class="field">
+                <img alt="logo" class="image" th:src="@{/images/password.svg}"></img>
+                <label class="label" for="password">Password:</label>
+                <input class="input" id="password" placeholder="input your password" required
+                       th:field="*{password}" type="password"/>
+            </div>
+            <h3 class="alert" th:text="${message}"></h3>
+            <div class="field" style="align-content: center; justify-content: center">
+                <button class="button-login" type="submit">Submit</button>
+            </div>
+        </form>
+
+        <form th:action="@{/redirectToRegister}">
+            <input class="register-button" type="submit" value="Create new account"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

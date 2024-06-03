@@ -1,0 +1,43 @@
+.import-wrapper {
+    display: none;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.import {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 16px 10px 16px;
+}
+
+.import-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.import-card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.import-card {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    width: 400px;
+    margin: auto;
+    background-color: white;
+}
