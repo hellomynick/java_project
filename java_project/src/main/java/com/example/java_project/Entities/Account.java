@@ -20,6 +20,7 @@ public class Account extends AbstractEntity {
 
     @Getter
     @Setter
+    @Column(unique = true)
     private String userName;
 
     @Getter
@@ -32,6 +33,7 @@ public class Account extends AbstractEntity {
 
     @Getter
     @Setter
+    @Column(unique = true)
     private String email;
 
     @Getter

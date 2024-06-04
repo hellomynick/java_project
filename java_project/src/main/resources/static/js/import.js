@@ -42,11 +42,12 @@ function readFileExcel(file) {
 
 function matchingHeader(excelReader, headers) {
     let excelHeaders = excelReader.Strings;
-    headers.forEach((item, index) => {
-        if (item !== excelHeaders[index].t) {
-            return false
+
+    for (let i = 0; i < headers.length; i++) {
+        if (headers[i] !== excelHeaders[i].t) {
+            return false;
         }
-    })
+    }
 
     return true;
 }
@@ -54,15 +55,57 @@ function matchingHeader(excelReader, headers) {
 function getAccounts(excelReader) {
     let sheetName = excelReader.SheetNames;
     let accounts = [];
-    sheetName.forEach((item) => {
-        let objects = XLSX.utils.sheet_to_json(excelReader.Sheets[item])
+    let messages = [];
+    let isValid;
 
-        objects.forEach((object) => {
-            accounts.push(new Account(object.key, object.name, object.password, object.isActive, object.email, object.phone, object.avatarName));
-        })
-    })
-    
-    return accounts
+    for (let i = 0; i < sheetName.length; i++) {
+        let objects = XLSX.utils.sheet_to_json(excelReader.Sheets[i])
+        isValid = true;
+
+        for (let j = 0; j < objects.length; j++) {
+            const validObject = validateAccount(j, objects[i]);
+            isValid = validObject.isValid;
+            if (isValid === false) {
+                messages.push(validObject.message);
+                break;
+            }
+
+            accounts.push(new Account(object.key, object.user_name, object.password, object.isActive, object.email, object.phone, object.avatarName));
+            messages.push(validObject.message);
+        }
+
+        if (isValid === false) {
+            break;
+        }
+    }
+
+    return {isValid, messages, accounts}
+}
+
+function validateAccount(index, account) {
+    let message = "Row " + index;
+    let isValid = true;
+
+    if (account.user_name == null) {
+        message += " User name null."
+        isValid = false;
+    }
+
+    if (account.password == null) {
+        message += " Password null."
+        isValid = false;
+    }
+
+    if (account.email == null) {
+        message += " Email null"
+        isValid = false;
+    }
+
+    if (isValid) {
+        message += " Ok"
+    }
+
+    return {isValid, message}
 }
 
 function importFile() {
@@ -74,8 +117,14 @@ function importFile() {
         if (!isMatched) {
             console.log("Header not matching with form [key, userName, password, isActive, email, phoneNumber, avatarName]")
         } else {
-            let accounts = getAccounts(excelReader);
-            pushAccounts(accounts);
+            let object = getAccounts(excelReader);
+
+            if (object.isValid === true) {
+                pushAccounts(object.accounts);
+                console.log(object.messages)
+            } else {
+                console.log(object.messages)
+            }
         }
     }).catch((e) => {
         console.log(e)
@@ -85,7 +134,10 @@ function importFile() {
 function pushAccounts(accounts) {
     $.ajax({
         url: "/accounts/import",
-        data: {accounts},
+        type: 'POST',
+        data: JSON.stringify(accounts),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         success: function (response) {
             console.log(response)
         }

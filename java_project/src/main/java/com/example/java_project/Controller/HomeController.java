@@ -5,6 +5,7 @@ import com.example.java_project.Models.AccountRequest;
 import com.example.java_project.Models.LoginRequest;
 import com.example.java_project.Models.RegisterRequest;
 import com.example.java_project.Services.IAccountService;
+import com.example.java_project.extensions.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -121,11 +122,7 @@ public class HomeController {
 
     @PostMapping("/accounts/import")
     @ResponseBody
-    public String importAccount(AccountRequest[] accountRequests) {
-        for (AccountRequest account : accountRequests) {
-            accountService.createAccount(account);
-        }
-
-        return "Success";
+    public Response<AccountRequest[]> importAccount(@RequestBody AccountRequest[] accountRequests) {
+        return accountService.importListAccount(accountRequests);
     }
 }

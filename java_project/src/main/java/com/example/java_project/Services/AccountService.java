@@ -4,6 +4,8 @@ import com.example.java_project.Entities.Account;
 import com.example.java_project.Models.AccountRequest;
 import com.example.java_project.Models.RegisterRequest;
 import com.example.java_project.Repositories.IAccountRepository;
+import com.example.java_project.extensions.HttpResult;
+import com.example.java_project.extensions.Response;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,20 +42,56 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public boolean createAccount(AccountRequest accountRequest) {
-        var account = new Account();
-        account.setUserName(accountRequest.getUserName());
-        account.setPassword(accountRequest.getPassword());
-        account.setActive(accountRequest.isActive());
-        account.setEmail(accountRequest.getEmail());
-        account.setPhoneNumber(accountRequest.getPhoneNumber());
-        account.setDateCreate(LocalDateTime.now());
-        account.setDateUpdate(LocalDateTime.now());
-        return createAccount(account);
+    public Response<AccountRequest[]> importListAccount(AccountRequest[] accountRequests) {
+        Response<AccountRequest[]> response = new Response<>();
+
+        ArrayList<String> messages = new ArrayList<>();
+
+        for (int i = 0; i < accountRequests.length; i++) {
+            AccountRequest accountRequest = accountRequests[i];
+
+            Account account = new Account();
+            String message = "Row" + i;
+
+            boolean isExistEmail = false;
+            boolean isExistUserName = false;
+
+            if (isExistingEmail(accountRequest.getEmail())) {
+                message += "Already exist email. ";
+                isExistEmail = true;
+            }
+
+            if (isExistingUserName(accountRequest.getUserName())) {
+                message += "Already exist user name.";
+                isExistUserName = true;
+            }
+
+            if (isExistEmail || isExistUserName) {
+                messages.add(message);
+                continue;
+            }
+
+            account.setUserName(accountRequest.getUserName());
+            account.setPassword(accountRequest.getPassword());
+            account.setActive(accountRequest.isActive());
+            account.setEmail(accountRequest.getEmail());
+            account.setPhoneNumber(accountRequest.getPhoneNumber());
+            account.setDateCreate(LocalDateTime.now());
+            account.setDateUpdate(LocalDateTime.now());
+
+            messages.add(message + "Success");
+
+            createAccount(account);
+        }
+        response.setHttpResult(HttpResult.Ok);
+        response.setResponse(accountRequests);
+        response.setMessage(messages);
+
+        return response;
     }
 
     private boolean createAccount(Account account) {
-        boolean isExists = isExistingAccount(account.getUserName());
+        boolean isExists = isExistingUserName(account.getUserName());
         if (isExists) {
             return false;
         }
@@ -61,8 +99,13 @@ public class AccountService implements IAccountService {
         return true;
     }
 
-    private boolean isExistingAccount(String userName) {
+    private boolean isExistingUserName(String userName) {
         Account account = accountRepository.getAccountByUserName(userName);
+        return account != null;
+    }
+
+    private boolean isExistingEmail(String email) {
+        Account account = accountRepository.getAccountByEmail(email);
         return account != null;
     }
 
